@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // const API_URL = 'http://localhost:8000';
-const API_URL = 'https://ai-csv-backend.onrender.com';
+const API_URL = 'https://aicsv.onrender.com';
 
 export const uploadCSV = async (file) => {
     const formData = new FormData();
