@@ -7,6 +7,14 @@ import { uploadCSV } from '@/api';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { ChevronDown } from 'lucide-react';
+
 function App() {
   const [report, setReport] = useState(null);
   const [history, setHistory] = useState([]);
@@ -57,6 +65,16 @@ function App() {
     }
   };
 
+  const loadDemoCSV = (filename) => {
+    // Explicitly download the file without processing it through AI
+    const link = document.createElement("a");
+    link.href = `/democsv/${filename}`;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   const handleHistorySelect = (entry) => {
     setReport(entry.report);
     setIsSidebarOpen(false); // Close sidebar on mobile/desktop selection
@@ -87,8 +105,32 @@ function App() {
             <div className="w-full flex-1 md:w-auto md:flex-none">
               {/* Could add search here */}
             </div>
-            <nav className="flex items-center">
-              <Button variant="outline" size="sm" onClick={() => setReport(null)}>New Analysis</Button>
+            <nav className="flex items-center gap-2">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" size="sm" className="hidden sm:flex items-center gap-1">
+                    Try Demo Data <ChevronDown className="h-4 w-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={() => loadDemoCSV('ecommerce_sales.csv')}>
+                    E-commerce Sales
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => loadDemoCSV('healthcare_metrics.csv')}>
+                    Healthcare Metrics
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => loadDemoCSV('saas_engagement.csv')}>
+                    SaaS User Engagement
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => loadDemoCSV('manufacturing_qc.csv')}>
+                    Manufacturing Quality
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => loadDemoCSV('real_estate.csv')}>
+                    Real Estate Listings
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+              <Button variant="default" size="sm" onClick={() => setReport(null)}>New Analysis</Button>
             </nav>
           </div>
         </div>
