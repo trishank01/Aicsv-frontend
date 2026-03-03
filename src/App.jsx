@@ -106,6 +106,14 @@ function App() {
               {/* Could add search here */}
             </div>
             <nav className="flex items-center gap-2">
+              <a
+                href="https://www.linkedin.com/in/trishank-dev/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-medium hover:underline text-muted-foreground hidden sm:block mr-2"
+              >
+                Built by Trishank
+              </a>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="outline" size="sm" className="hidden sm:flex items-center gap-1">
